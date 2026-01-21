@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+    --color-background: hsl(210 40% 98%);
+    --color-foreground: hsl(222 47% 11%);
+    --color-primary: hsl(221 83% 53%);
+
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-display: 'Outfit', sans-serif;
+}
+
+/* Global Styles */
+:root {
+    color-scheme: light;
+}
+
+body {
+    @apply text-slate-800 bg-slate-50;
+    font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+}
+
+/* Premium Mesh Background */
+.bg-mesh {
+    background-color: #f8fafc;
+    background-image:
+        radial-gradient(at 0% 0%, hsla(217, 91%, 93%, 1) 0, transparent 50%),
+        radial-gradient(at 50% 0%, hsla(225, 98%, 96%, 1) 0, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(217, 91%, 93%, 1) 0, transparent 50%);
+}
+
+.bg-glass {
+    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl;
+}
+
+.card-hover {
+    @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
+}
+
+/* Recharts Customization */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+    stroke: #e2e8f0;
+    stroke-dasharray: 4 4;
+}
