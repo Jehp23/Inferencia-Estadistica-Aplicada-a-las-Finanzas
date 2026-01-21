@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowRight, TrendingUp, BarChart3, GraduationCap } from 'lucide-react';
-import { cn } from '../lib/utils';
 
 export default function Landing({ onEnter }) {
     return (

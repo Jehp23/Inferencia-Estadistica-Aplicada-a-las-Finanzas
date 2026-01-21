@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { jStat } from 'jstat';
-import { ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, Bar, Area } from 'recharts';
-import { ChevronDown, ChevronUp, AlertCircle, RefreshCw, Info, Settings, ArrowLeft } from 'lucide-react';
+import { ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, Bar } from 'recharts';
+import { ChevronDown, ChevronUp, AlertCircle, RefreshCw, Info, Settings } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 // --- STATISTICAL LOGIC (Same as before) ---
