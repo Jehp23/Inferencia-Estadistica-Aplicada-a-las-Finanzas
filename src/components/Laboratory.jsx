@@ -90,7 +90,8 @@ export default function Laboratory() {
         } else {
             // REAL DATA LOGIC
             try {
-                const res = await fetch(`http://localhost:8001/api/data/${ticker}?period=${period}`);
+                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8001';
+                const res = await fetch(`${apiUrl}/api/data/${ticker}?period=${period}`);
                 if (!res.ok) {
                     const errData = await res.json();
                     throw new Error(errData.detail || "Error al obtener datos");

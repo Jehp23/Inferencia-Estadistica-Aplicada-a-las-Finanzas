@@ -1,0 +1,17 @@
+# Blueprint para desplegar el backend API en Render
+# Crea un NUEVO Web Service en Render y conecta este repo
+# Luego configura la URL del backend en el servicio del frontend (ver instrucciones abajo)
+
+services:
+  - type: web
+    name: inferencia-api
+    runtime: python
+    plan: free
+
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+
+    # Render inyecta PORT automáticamente
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.0"
