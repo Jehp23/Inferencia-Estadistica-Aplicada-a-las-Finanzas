@@ -25,7 +25,7 @@ jobs:
 
       - name: Build
         env:
-          VITE_API_URL: https://inferencia-api.onrender.com
+          VITE_API_URL: https://inferencia-estadistica-aplicada-a-las.onrender.com
         run: npm run build
 
       - name: Deploy to gh-pages
