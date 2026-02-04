@@ -88,19 +88,30 @@ export default function Laboratory() {
                 setLoading(false);
             }, 600);
         } else {
-            // REAL DATA LOGIC
+            // REAL DATA LOGIC (timeout 90s para dar tiempo al backend de Render a despertar)
             try {
                 const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8001';
-                const res = await fetch(`${apiUrl}/api/data/${ticker}?period=${period}`);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 90000);
+                const res = await fetch(`${apiUrl}/api/data/${ticker}?period=${period}`, {
+                    signal: controller.signal,
+                });
+                clearTimeout(timeoutId);
                 if (!res.ok) {
-                    const errData = await res.json();
-                    throw new Error(errData.detail || "Error al obtener datos");
+                    const errData = await res.json().catch(() => ({}));
+                    throw new Error(errData.detail || `Error ${res.status}`);
                 }
                 const data = await res.json();
                 processData(data.returns, parseFloat(confStr));
             } catch (err) {
                 console.error(err);
-                setError(err.message);
+                let msg = err.message;
+                if (err.name === 'AbortError') {
+                    msg = 'El servidor tarda en responder. En el plan gratuito de Render puede tardar hasta 1 minuto en despertar. Intenta de nuevo.';
+                } else if (err.message === 'Failed to fetch' || err.message?.includes('NetworkError')) {
+                    msg = 'No se pudo conectar con el servidor. Verifica que el backend esté desplegado en Render.';
+                }
+                setError(msg);
             } finally {
                 setLoading(false);
             }
